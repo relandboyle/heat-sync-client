@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         title: 'Heat Sync',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 117, 174, 222)),
         ),
         home: const MyHomePage(),
       ),
@@ -102,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(
               child: Container(
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                color: Theme.of(context).colorScheme.inversePrimary,
                 child: page,
               ),
             ),
@@ -165,27 +166,24 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var favorites = appState.favorites;
-    final theme = Theme.of(context);
-    final style = theme.textTheme.displayMedium!.copyWith(
-      color: theme.colorScheme.onPrimary,
-    );
-    final style2 = theme.textTheme.displaySmall!.copyWith(
-      color: theme.colorScheme.onPrimary,
-    );
+
+    if (appState.favorites.isEmpty) {
+      return const Center(
+        child: Text('No favorites yet.'),
+      );
+    }
 
     return ListView(
       children: [
-        Card(
-            elevation: 4,
-            color: theme.colorScheme.primary,
-            child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: (Text('Favorites', style: style)))),
-        for (var fav in favorites)
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text('You have ' '${appState.favorites.length} favorites:'),
+        ),
+        for (var pair in appState.favorites)
           ListTile(
-            title: Text(fav.asPascalCase, style: style2),
-            onTap: () => appState.removeFavorite(fav),
+            leading: const Icon(Icons.favorite),
+            title: Text(pair.asPascalCase),
+            onTap: () => appState.removeFavorite(pair),
           ),
       ],
     );
