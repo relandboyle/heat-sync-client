@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'HeatSync',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 38, 104, 145)),
+            seedColor: const Color.fromARGB(255, 27, 69, 113)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'HeatSync'),

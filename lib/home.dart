@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:ft_test_app/temperature.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -13,8 +14,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   bool mobile = false;
-  var accountKey = dotenv.env['ACCOUNT_KEY'];
-  var webApi = dotenv.env['API_URL'];
+  final String redLogo = './assets.red-blue-logo.svg';
+  late Widget redLogoSvg =
+      SvgPicture.asset(redLogo, semanticsLabel: 'Acme Logo');
 
   void _incrementCounter() {
     setState(() {
@@ -34,7 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        leading: const IconButton(
+          padding: EdgeInsets.zero,
+          onPressed: null,
+          icon: Icon(Icons.home),
+        ),
         title: Center(child: Text(widget.title)),
       ),
       body: Center(
