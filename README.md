@@ -11,4 +11,4 @@ HeatSync empowers tenants, tenants' associations, and their legal representative
 ## Getting Started
 
 - Clone the repository
-- flutter run
+- 'flutter run'
