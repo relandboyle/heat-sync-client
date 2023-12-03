@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:ft_test_app/widgets/heat_sync_card.dart';
+import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 
 class TemperaturePage extends StatefulWidget {
   const TemperaturePage({super.key});
@@ -11,64 +13,54 @@ class TemperaturePage extends StatefulWidget {
 class _TemperaturePageState extends State<TemperaturePage> {
   var accountKey = dotenv.env['ACCOUNT_KEY'];
   var webApi = dotenv.env['API_URL'];
+  static const List<String> options = <String>[
+    'aardvark',
+    'bobcat',
+    'chameleon',
+  ];
 
   int testVar = 20;
-
-  void testMethod() {
-    print("TEST CARD");
-  }
 
   @override
   Widget build(BuildContext context) {
     return const Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Center(child: Text("Placeholder Text!"))],
+        children: [
+          Text('Please select a building:'),
+        ],
       ),
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(
-          height: 150,
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        HeatSyncCard(
+          title: "5",
+          description: "Days since violation",
           width: 150,
-          child: Card(
-            elevation: 5,
-            child: Text("CARD EXAMPLE"),
-          ),
-        ),
-        SizedBox(
           height: 150,
-          width: 150,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(3.0),
-              ),
-            ),
-            color: Color.fromARGB(255, 141, 24, 47),
-            elevation: 5,
-            child: Text(
-              "CARD EXAMPLE",
-              style: TextStyle(
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
         ),
-        Column(children: [
-          ElevatedButton(onPressed: null, child: Text("Add Building")),
-          ElevatedButton(onPressed: null, child: Text("Add Unit")),
+        HeatSyncCard(
+          title: "12",
+          description: "Violations this season",
+          width: 150,
+          height: 150,
+        ),
+        Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          ElevatedButton(onPressed: null, child: Text("Something")),
+          ElevatedButton(onPressed: null, child: Text("Something Else")),
           ElevatedButton(onPressed: null, child: Text("C / F")),
         ]),
       ]),
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        ElevatedButton(onPressed: null, child: Text("Add Building")),
-        ElevatedButton(onPressed: null, child: Text("Add Unit")),
-        ElevatedButton(onPressed: null, child: Text("C / F")),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        ElevatedButton(onPressed: null, child: Text("From Date")),
+        ElevatedButton(onPressed: null, child: Text("To Date")),
+        ElevatedButton(
+            onPressed: null, child: Text("Get Data")),
       ]),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        MyCard(
-          title: "TEST CARD",
-          description: "This is a description.",
+        HeatSyncCard(
+          title: "LINE GRAPH",
+          description: "This is a placeholder",
+          width: 400,
+          height: 200,
         ),
         Column(children: [
           Row(children: [
@@ -90,57 +82,5 @@ class _TemperaturePageState extends State<TemperaturePage> {
         ])
       ]),
     ]);
-  }
-}
-
-class MyCard extends StatelessWidget {
-  final String title;
-  final String description;
-
-  const MyCard({
-    super.key,
-    required this.title,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).colorScheme.secondary,
-      elevation: 5,
-      margin: const EdgeInsets.all(8),
-      semanticContainer: true,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(3.0),
-      ),
-      child: InkWell(
-        splashColor: Colors.lightGreenAccent.withAlpha(30),
-        //sizedBox of the card
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              width: 150,
-              height: 50,
-              child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      title,
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      description,
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

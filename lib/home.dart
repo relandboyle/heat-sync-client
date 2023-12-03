@@ -1,8 +1,10 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ft_test_app/temperature.dart';
 import 'package:ft_test_app/buildings.dart';
 import 'package:ft_test_app/units.dart';
+import 'package:ft_test_app/widgets/fast_form_control.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -15,7 +17,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  // Widget _selectedPage = const Placeholder();
 
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   bool showLeading = false;
@@ -25,6 +26,12 @@ class _MyHomePageState extends State<MyHomePage> {
   final String redLogo = './assets.red-blue-icon.svg';
   late Widget redLogoSvg =
       SvgPicture.asset(redLogo, semanticsLabel: 'Acme Logo');
+
+  static const List<String> animals = <String>[
+    'aardvark',
+    'bobcat',
+    'chameleon',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedPage = const TemperaturePage();
         break;
       case 1:
-        selectedPage = const BuildingsPage();
+        selectedPage = MyFormPage(title: "TEST", data: animals);
         break;
       case 2:
         selectedPage = const UnitsPage();
@@ -47,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: FlexColor.blueLightPrimary,
           title: Center(child: Text(widget.title)),
         ),
         body: Row(children: <Widget>[
@@ -64,17 +71,23 @@ class _MyHomePageState extends State<MyHomePage> {
             destinations: const <NavigationRailDestination>[
               NavigationRailDestination(
                 icon: Icon(Icons.thermostat_sharp),
-                selectedIcon: Icon(Icons.thermostat_sharp),
+                selectedIcon: Icon(Icons.thermostat_sharp,
+                    // color: Color.fromARGB(255, 136, 25, 25)
+                    ),
                 label: Text('Temperature'),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.business_sharp),
-                selectedIcon: Icon(Icons.business_sharp),
+                selectedIcon: Icon(Icons.business_sharp,
+                    // color: Color.fromARGB(255, 136, 25, 25)
+                    ),
                 label: Text('Buildings'),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.chair_sharp),
-                selectedIcon: Icon(Icons.chair_sharp),
+                selectedIcon: Icon(Icons.chair_sharp,
+                    // color: Color.fromARGB(255, 136, 25, 25)
+                    ),
                 label: Text('Units'),
               ),
             ],
