@@ -1,4 +1,7 @@
-# heat_sync
+# HeatSync
+### Stay warm.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ffaccc36-3c6d-4fc1-8c0b-54dbcfc71b69/deploy-status)](https://app.netlify.com/sites/heat-sync/deploys)
 
 This application is a web client designed to interface with the HeatSync server.
 

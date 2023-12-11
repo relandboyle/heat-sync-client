@@ -1,7 +1,12 @@
+import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ft_test_app/widgets/heat_sync_card.dart';
-import 'package:flutter_fast_forms/flutter_fast_forms.dart';
+import 'package:ft_test_app/classes/temperature_entry.dart';
+import 'package:ft_test_app/classes/channel_data.dart';
 
 class TemperaturePage extends StatefulWidget {
   const TemperaturePage({super.key});
@@ -12,25 +17,55 @@ class TemperaturePage extends StatefulWidget {
 
 class _TemperaturePageState extends State<TemperaturePage> {
   var accountKey = dotenv.env['ACCOUNT_KEY'];
-  var webApi = dotenv.env['WEB_API_URL'];
-  static const List<String> options = <String>[
-    'aardvark',
-    'bobcat',
-    'chameleon',
-  ];
+  var webApi = dotenv.get('WEB_API', fallback: 'API URL not found');
+  var server = dotenv.env['HEAT_SYNC_SERVER'];
+  late ChannelData channelData;
+  var test = const String.fromEnvironment("TEST_ARG");
+
+  void mapResponse(response) {
+    // print(response.body);
+    // print(response.body.runtimeType);
+    ChannelData channelData = ChannelData.fromJson(jsonDecode(response.body));
+    print(Map.from(channelData.channels[0]));
+    SensorData channel1 = SensorData.fromJson(channelData.channels[0]);
+    print(channel1.lastValues);
+    LastValues lvOne = LastValues.fromJson(jsonDecode(channel1.lastValues));
+    print(lvOne);
+  }
+
+  Future<void> getCurrentData() async {
+    // Uri resource = Uri(
+    //     scheme: 'https',
+    //     host: server,
+    //     path: 'channels',
+    //     queryParameters: {'account_key': accountKey});
+
+    // await http
+    //     .get(resource)
+    //     .then((data) => mapResponse(data))
+    //     .catchError((err) {
+    //   print(err);
+    //   return err;
+    // });
+
+    // print(channelData);
+    print("TESTING ENVIRONMENT VARIABLE");
+    print(test);
+    print("TESTED?");
+  }
 
   int testVar = 20;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(children: [
-      Row(
+    return Column(children: [
+      const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Please select a building:'),
         ],
       ),
-      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      const Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         HeatSyncCard(
           title: "5",
           description: "Days since violation",
@@ -43,19 +78,17 @@ class _TemperaturePageState extends State<TemperaturePage> {
           width: 150,
           height: 150,
         ),
-        Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          ElevatedButton(onPressed: null, child: Text("Something")),
-          ElevatedButton(onPressed: null, child: Text("Something Else")),
-          ElevatedButton(onPressed: null, child: Text("C / F")),
-        ]),
       ]),
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        ElevatedButton(onPressed: null, child: Text("From Date")),
-        ElevatedButton(onPressed: null, child: Text("To Date")),
+        const ElevatedButton(onPressed: null, child: Text("From Date")),
+        const ElevatedButton(onPressed: null, child: Text("To Date")),
         ElevatedButton(
-            onPressed: null, child: Text("Get Data")),
+            onPressed: () {
+              getCurrentData();
+            },
+            child: const Text("Get Data")),
       ]),
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         HeatSyncCard(
           title: "LINE GRAPH",
           description: "This is a placeholder",

@@ -72,6 +72,7 @@ flutter:
     - lib/widgets/
     - assets/black-transparent-logo.svg
     - assets/red-blue-icon.svg
+    - assets/mock_data.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -34,8 +34,8 @@ class MyFormPage extends StatelessWidget {
                 labelText: "Input",
                 name: "TEST",
                 options: data,
-                onChanged: (value) => {print(value)},
-                onSelected: (option) => {print(formKey)},
+                // onChanged: (value) => {print(value)},
+                // onSelected: (option) => {print(formKey)},
               )
             ],
           ),

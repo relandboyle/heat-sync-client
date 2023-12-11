@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ft_test_app/temperature.dart';
-import 'package:ft_test_app/buildings.dart';
 import 'package:ft_test_app/units.dart';
 import 'package:ft_test_app/widgets/fast_form_control.dart';
 
