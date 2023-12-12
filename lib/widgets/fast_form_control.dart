@@ -8,6 +8,11 @@ class MyFormPage extends StatelessWidget {
   final String title;
   final List<String> data;
 
+  void printValue(value) {
+    // print(value);
+    // print(value.runtimeType);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,23 +24,26 @@ class MyFormPage extends StatelessWidget {
           child: FastForm(
             formKey: formKey,
             children: [
-              const FastTextField(
+              FastTextField(
                 name: 'field_destination',
                 labelText: 'Destination',
                 placeholder: 'Where are you going?',
+                onChanged: (value) => printValue(value),
               ),
               FastDateRangePicker(
                 name: 'field_check_in_out',
                 labelText: 'Check-in - Check-out',
-                firstDate: DateTime.now(),
+                firstDate: DateTime.now().subtract(const Duration(days: 365)),
                 lastDate: DateTime.now().add(const Duration(days: 365)),
+                onChanged: (value) => printValue(value),
+                onSaved: (value) => printValue(value),
               ),
               FastAutocomplete(
                 labelText: "Input",
                 name: "TEST",
                 options: data,
-                // onChanged: (value) => {print(value)},
-                // onSelected: (option) => {print(formKey)},
+                onChanged: (value) => printValue(value),
+                onSelected: (option) => printValue(option),
               )
             ],
           ),

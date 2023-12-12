@@ -1,9 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ft_test_app/buildings.dart';
 import 'package:ft_test_app/temperature.dart';
 import 'package:ft_test_app/units.dart';
-import 'package:ft_test_app/widgets/fast_form_control.dart';
+// import 'package:ft_test_app/widgets/fast_form_control.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -26,11 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
   late Widget redLogoSvg =
       SvgPicture.asset(redLogo, semanticsLabel: 'Acme Logo');
 
-  static const List<String> animals = <String>[
-    'aardvark',
-    'bobcat',
-    'chameleon',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedPage = const TemperaturePage();
         break;
       case 1:
-        selectedPage = MyFormPage(title: "TEST", data: animals);
+        selectedPage = const BuildingsPage();
         break;
       case 2:
         selectedPage = const UnitsPage();

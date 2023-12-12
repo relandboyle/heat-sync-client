@@ -24,7 +24,7 @@ class HeatSyncCard extends StatelessWidget {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(3.0),
+        borderRadius: BorderRadius.circular(7.0),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
