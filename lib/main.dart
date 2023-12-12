@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ft_test_app/home.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 Future main() async {
   await dotenv.load();
@@ -15,13 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'HeatSync',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 27, 69, 113),
-            ),
-        useMaterial3: true,
-        
-      ),
+      theme: FlexThemeData.light(scheme: FlexScheme.flutterDash),
+      darkTheme: FlexThemeData.dark(scheme: FlexScheme.flutterDash),
+      themeMode: ThemeMode.light,
       home: const MyHomePage(title: 'HeatSync'),
     );
   }
