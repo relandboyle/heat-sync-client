@@ -116,7 +116,9 @@ class _FakeAPI {
       return const Iterable<BuildingData>.empty();
     }
 
-    final response = await http.post(Uri.parse("http://localhost:8089/api/v1/building/searchBuildings"),
+    final response = await http.post(
+        // Uri.parse("http://localhost:8089/api/v1/building/searchBuildings"),
+        Uri.parse('https://heat-sync-534f0413abe0.herokuapp.com/api/v1/building/searchBuildings'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
