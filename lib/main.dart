@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ft_test_app/home.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
-Future main() async {
-  await dotenv.load();
+void main() {
   runApp(const MyApp());
 }
 

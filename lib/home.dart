@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ft_test_app/buildings.dart';
 import 'package:ft_test_app/temperature.dart';
 import 'package:ft_test_app/units.dart';
-// import 'package:ft_test_app/widgets/fast_form_control.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -50,7 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: FlexColor.blueLightPrimary,
-          title: Center(child: Text(widget.title)),
+          title: Align(
+            alignment: const Alignment(0.97, 0.0),
+            child: Text(widget.title)),
         ),
         body: Row(children: <Widget>[
           NavigationRail(

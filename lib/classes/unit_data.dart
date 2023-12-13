@@ -1,22 +1,25 @@
 class UnitData {
-  int unitId;
+  String unitId;
   String tenantName;
   String unitNumber;
-  int buildingId;
+  String buildingId;
+  String fullUnit; // New field
 
   UnitData({
     required this.unitId,
     required this.tenantName,
     required this.unitNumber,
     required this.buildingId,
+    required this.fullUnit,
   });
 
   factory UnitData.fromJson(Map<String, dynamic> json) {
     return UnitData(
-      unitId: json['unitId'] as int,
+      unitId: json['unitId'] as String,
       tenantName: json['tenantName'] as String,
       unitNumber: json['unitNumber'] as String,
-      buildingId: json['buildingId'] as int,
+      buildingId: json['buildingId'] as String,
+      fullUnit: json['fullUnit'] as String,
     );
   }
 
@@ -26,6 +29,7 @@ class UnitData {
       'tenantName': tenantName,
       'unitNumber': unitNumber,
       'buildingId': buildingId,
+      'fullUnit': fullUnit,
     };
   }
 }
