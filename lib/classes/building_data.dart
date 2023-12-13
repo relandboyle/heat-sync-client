@@ -9,13 +9,13 @@ class BuildingData {
   String fullAddress; // New field
 
   BuildingData({
-    required this.buildingId,
-    required this.city,
-    required this.country,
-    required this.postalCode,
-    required this.state,
-    required this.streetName,
-    required this.streetNumber,
+    this.buildingId = '',
+    this.city = '',
+    this.country = '',
+    this.postalCode = '',
+    this.state = '',
+    this.streetName = '',
+    this.streetNumber = '',
     required this.fullAddress,
   });
 

@@ -19,7 +19,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
   List<String> testList = ['test1', 'test2', 'test3'];
   late List<UnitData> unitList = [];
   late DateTimeRange dateRange;
-  late BuildingData selectedBuilding;
+  var selectedBuilding = BuildingData(fullAddress: '');
   late UnitData selectedUnit;
 
   void selectBuilding(BuildingData building) {
@@ -31,12 +31,12 @@ class _TemperaturePageState extends State<TemperaturePage> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      const Padding(
-        padding: EdgeInsets.only(top: 40, bottom: 20),
+      Padding(
+        padding: const EdgeInsets.only(top: 40, bottom: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('selected building'),
+            Text(selectedBuilding.fullAddress),
           ],
         ),
       ),

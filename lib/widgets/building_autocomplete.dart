@@ -99,7 +99,6 @@ class BuildingAutocompleteState extends State<BuildingAutocomplete> {
             // debugPrint('You just selected ${selection.fullAddress}');
             widget.selectBuilding(selection);
           },
-          optionsViewBuilder: ,
         ),
       ],
     );
