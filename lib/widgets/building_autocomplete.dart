@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:ft_test_app/classes/building_data.dart';
+import 'package:heat_sync/classes/building_data.dart';
 import 'package:http/http.dart' as http;
 
 /// Flutter code sample for [Autocomplete] that demonstrates fetching the
@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 /// network errors.
 
 const Duration debounceDuration = Duration(milliseconds: 400);
-
 
 class BuildingAutocomplete extends StatefulWidget {
   final Function selectBuilding;
@@ -20,6 +19,8 @@ class BuildingAutocomplete extends StatefulWidget {
 }
 
 class BuildingAutocompleteState extends State<BuildingAutocomplete> {
+  List<BuildingData> _kOptions = <BuildingData>[];
+
   // The query currently being searched for. If null, there is no pending
   // request.
   String? _currentQuery;
@@ -39,7 +40,7 @@ class BuildingAutocompleteState extends State<BuildingAutocomplete> {
 
     late final Iterable<BuildingData> options;
     try {
-      options = await _FakeAPI.search(_currentQuery!);
+      options = await _FakeAPI.search(this, _currentQuery!);
     } catch (error) {
       if (error is _NetworkException) {
         setState(() {
@@ -74,6 +75,8 @@ class BuildingAutocompleteState extends State<BuildingAutocomplete> {
           fieldViewBuilder: (BuildContext context, TextEditingController controller, FocusNode focusNode, VoidCallback onFieldSubmitted) {
             return TextFormField(
               decoration: InputDecoration(
+                label: const Text("Select a Building"),
+                border: const OutlineInputBorder(borderSide: BorderSide()),
                 errorText: _networkError ? 'Network error, please try again.' : null,
               ),
               controller: controller,
@@ -107,11 +110,10 @@ class BuildingAutocompleteState extends State<BuildingAutocomplete> {
 
 // Mimics a remote API.
 class _FakeAPI {
-  static List<BuildingData> _kOptions = <BuildingData>[];
+  // List<BuildingData> _kOptions = <BuildingData>[];
 
   // Searches the options, but injects a fake "network" delay.
-  static Future<Iterable<BuildingData>> search(String query) async {
-
+  static Future<Iterable<BuildingData>> search(BuildingAutocompleteState state, String query) async {
     if (query == '') {
       return const Iterable<BuildingData>.empty();
     }
@@ -127,9 +129,10 @@ class _FakeAPI {
         }));
 
     Iterable res = json.decode(response.body);
-    _kOptions = List<BuildingData>.from(res.map((model) => BuildingData.fromJson(model)));
+    print(res);
+    state._kOptions = List<BuildingData>.from(res.map((model) => BuildingData.fromJson(model)));
 
-    return _kOptions.where((BuildingData option) {
+    return state._kOptions.where((BuildingData option) {
       return option.fullAddress.toLowerCase().contains(query.toLowerCase());
     });
   }

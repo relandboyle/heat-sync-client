@@ -6,10 +6,10 @@ class UnitData {
   String fullUnit; // New field
 
   UnitData({
-    required this.unitId,
-    required this.tenantName,
-    required this.unitNumber,
-    required this.buildingId,
+    this.unitId = '',
+    this.tenantName = '',
+    this.unitNumber = '',
+    this.buildingId = '',
     required this.fullUnit,
   });
 

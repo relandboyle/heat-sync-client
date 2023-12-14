@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ft_test_app/home.dart';
+import 'package:heat_sync/home.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 void main() {

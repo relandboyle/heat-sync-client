@@ -1,4 +1,4 @@
-package com.example.ft_test_app
+package com.example.heat_sync
 
 import io.flutter.embedding.android.FlutterActivity
 
