@@ -1,6 +1,6 @@
 {
-    "name": "ft_test_app",
-    "short_name": "ft_test_app",
+    "name": "heat_sync",
+    "short_name": "heat_sync",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
@@ -28,12 +28,6 @@
         {
             "src": "icons/Icon-maskable-512.png",
             "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "icon-large.png",
-            "sizes": "800x750",
             "type": "image/png",
             "purpose": "maskable"
         }

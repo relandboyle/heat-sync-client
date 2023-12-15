@@ -1,10 +1,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ft_test_app/buildings.dart';
-import 'package:ft_test_app/temperature.dart';
-import 'package:ft_test_app/units.dart';
-// import 'package:ft_test_app/widgets/fast_form_control.dart';
+import 'package:heat_sync/buildings.dart';
+import 'package:heat_sync/temperature.dart';
+import 'package:heat_sync/units.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -24,9 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double groupAlignment = -1.0;
   bool mobile = false;
   final String redLogo = './assets.red-blue-icon.svg';
-  late Widget redLogoSvg =
-      SvgPicture.asset(redLogo, semanticsLabel: 'Acme Logo');
-
+  late Widget redLogoSvg = SvgPicture.asset(redLogo, semanticsLabel: 'Acme Logo');
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 2:
         selectedPage = const UnitsPage();
         break;
+      case 3:
+        selectedPage = const Placeholder();
+        break;
       default:
         throw UnimplementedError('no widget for $_selectedIndex');
     }
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: FlexColor.blueLightPrimary,
-          title: Center(child: Text(widget.title)),
+          title: Align(alignment: const Alignment(0.95, 0.0), child: Text(widget.title)),
         ),
         body: Row(children: <Widget>[
           NavigationRail(
@@ -66,24 +66,39 @@ class _MyHomePageState extends State<MyHomePage> {
             destinations: const <NavigationRailDestination>[
               NavigationRailDestination(
                 icon: Icon(Icons.thermostat_sharp),
-                selectedIcon: Icon(Icons.thermostat_sharp,
-                    // color: Color.fromARGB(255, 136, 25, 25)
-                    ),
+                selectedIcon: Icon(
+                  Icons.thermostat_sharp,
+                  // color: Color.fromARGB(255, 136, 25, 25)
+                ),
+                padding: EdgeInsets.all(20.0),
                 label: Text('Temperature'),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.business_sharp),
-                selectedIcon: Icon(Icons.business_sharp,
-                    // color: Color.fromARGB(255, 136, 25, 25)
-                    ),
+                selectedIcon: Icon(
+                  Icons.business_sharp,
+                  // color: Color.fromARGB(255, 136, 25, 25)
+                ),
+                padding: EdgeInsets.all(20.0),
                 label: Text('Buildings'),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.chair_sharp),
-                selectedIcon: Icon(Icons.chair_sharp,
-                    // color: Color.fromARGB(255, 136, 25, 25)
-                    ),
+                selectedIcon: Icon(
+                  Icons.chair_sharp,
+                  // color: Color.fromARGB(255, 136, 25, 25)
+                ),
                 label: Text('Units'),
+                padding: EdgeInsets.all(20.0),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.settings),
+                selectedIcon: Icon(
+                  Icons.settings,
+                  // color: Color.fromARGB(255, 136, 25, 25)
+                ),
+                padding: EdgeInsets.all(20.0),
+                label: Text('Settings'),
               ),
             ],
           ),
