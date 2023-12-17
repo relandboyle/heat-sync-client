@@ -1,9 +1,13 @@
 import 'package:heat_sync/classes/building_data.dart';
 import 'package:heat_sync/classes/unit_data.dart';
 import 'package:heat_sync/widgets/building_autocomplete.dart';
+import 'package:heat_sync/widgets/unit_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:heat_sync/widgets/heat_sync_card.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:logger/logger.dart';
+
+final logger = Logger();
 
 class TemperaturePage extends StatefulWidget {
   const TemperaturePage({super.key});
@@ -18,7 +22,6 @@ class _TemperaturePageState extends State<TemperaturePage> {
 
   List<BuildingData> buildingList = <BuildingData>[];
   List<UnitData> unitList = <UnitData>[];
-  // DateTimeRange dateRange = '' as DateTimeRange;
   List<String> testList = ['test1', 'test2', 'test3'];
   String selectedDateRange = '';
   var selectedBuilding = BuildingData(fullAddress: '');
@@ -26,15 +29,18 @@ class _TemperaturePageState extends State<TemperaturePage> {
 
   void selectDateRange(DateRangePickerSelectionChangedArgs args) {
     setState(() => selectedDateRange = args.value.toString().substring(21));
-    print(selectedDateRange.substring(21));
+    debugPrint(selectedDateRange.substring(21));
+    debugPrint(selectedDateRange.substring(21));
   }
 
   void selectBuilding(BuildingData building) {
     setState(() => selectedBuilding = building);
+    logger.i(selectedBuilding.fullAddress);
   }
 
   void selectUnit(UnitData unit) {
     setState(() => selectedUnit = unit);
+    debugPrint(selectedUnit.fullUnit);
   }
 
   @override
@@ -79,7 +85,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
               SizedBox(
                 height: 100,
                 width: 300,
-                child: BuildingAutocomplete(selectBuilding: selectBuilding),
+                child: UnitAutocomplete(selectBuilding: selectBuilding),
               ),
             ],
           ),

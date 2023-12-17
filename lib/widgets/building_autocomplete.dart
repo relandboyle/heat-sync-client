@@ -99,7 +99,7 @@ class BuildingAutocompleteState extends State<BuildingAutocomplete> {
           },
           displayStringForOption: (option) => option.fullAddress,
           onSelected: (BuildingData selection) {
-            // debugPrint('You just selected ${selection.fullAddress}');
+            // debugdebugPrint('You just selected ${selection.fullAddress}');
             widget.selectBuilding(selection);
           },
         ),
@@ -129,7 +129,7 @@ class _FakeAPI {
         }));
 
     Iterable res = json.decode(response.body);
-    print(res);
+    debugPrint('$res');
     state._kOptions = List<BuildingData>.from(res.map((model) => BuildingData.fromJson(model)));
 
     return state._kOptions.where((BuildingData option) {

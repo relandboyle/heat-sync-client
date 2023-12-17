@@ -43,6 +43,8 @@ dependencies:
   flutter_fast_forms: ^13.0.0
   google_fonts: ^6.1.0
   syncfusion_flutter_datepicker: ^23.2.7
+  logger: ^2.0.2+1
+  rxdart: ^0.27.7
 
 
 dev_dependencies:
