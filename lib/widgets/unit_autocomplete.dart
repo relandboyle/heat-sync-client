@@ -6,6 +6,7 @@ import 'package:heat_sync/classes/building_data.dart';
 import 'package:heat_sync/classes/unit_data.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:heat_sync/services/units_service.dart';
 
 final logger = Logger();
 
@@ -44,8 +45,9 @@ class UnitAutocompleteState extends State<UnitAutocomplete> {
     _currentQuery = query;
 
     late final Iterable<UnitData> options;
+
     try {
-      // options = await _FakeAPI.search(this, _currentQuery!);
+      options = await UnitsService().handleSearch(_currentQuery!);
     } catch (error) {
       if (error is _NetworkException) {
         setState(() {
@@ -62,7 +64,7 @@ class UnitAutocompleteState extends State<UnitAutocomplete> {
     }
     _currentQuery = null;
 
-    // return options;
+    return options;
   }
 
   @override
@@ -80,7 +82,7 @@ class UnitAutocompleteState extends State<UnitAutocomplete> {
           fieldViewBuilder: (BuildContext context, TextEditingController controller, FocusNode focusNode, VoidCallback onFieldSubmitted) {
             return TextFormField(
               decoration: InputDecoration(
-                label: const Text("Select a Building"),
+                label: const Text("Select a Unit"),
                 border: const OutlineInputBorder(borderSide: BorderSide()),
                 errorText: _networkError ? 'Network error, please try again.' : null,
               ),
@@ -102,9 +104,8 @@ class UnitAutocompleteState extends State<UnitAutocomplete> {
             _lastOptions = options;
             return options;
           },
-          // displayStringForOption: (option) => option.fullAddress,
+          displayStringForOption: (option) => option.fullUnit,
           onSelected: (UnitData selection) {
-            // debugdebugPrint('You just selected ${selection.fullAddress}');
             widget.selectBuilding(selection);
           },
         ),
@@ -113,47 +114,6 @@ class UnitAutocompleteState extends State<UnitAutocomplete> {
   }
 }
 
-// Mimics a remote API.
-class _FakeAPI {
-  // List<UnitData> _kOptions = <UnitData>[];
-
-  // Searches the options, but injects a fake "network" delay.
-  // static Future<Iterable<UnitData>> search(UnitAutocompleteState state, String query) async {
-  //   debugPrint(query);
-  //   debugPrint(state._currentQuery);
-  //   debugPrint('${state._debouncedSearch}');
-  //   debugPrint('${state._kOptions}');
-  //   Iterable<UnitData> res = <UnitData>[];
-
-  //   try {
-  //     final response = await http.post(
-  //         // Uri.parse("http://localhost:8089/api/v1/building/searchBuildings"),
-  //         Uri.parse('https://heat-sync-534f0413abe0.herokuapp.com/api/v1/unit/searchUnits'),
-  //         headers: <String, String>{
-  //           'Content-Type': 'application/json; charset=UTF-8',
-  //         },
-  //         body: jsonEncode(<String, String>{
-  //           'fullUnit': query,
-  //         }));
-
-  //     logger.i(response);
-  //     res = json.decode(response.body);
-  //     logger.i(res);
-
-  //     state._kOptions = res;
-
-  //     return state._kOptions.where((UnitData option) {
-  //       return option.fullUnit.toLowerCase().contains(query.toLowerCase());
-  //     });
-  //   } catch (ex) {
-  //     logger.e('Interesting Exception: $ex');
-  //   }
-
-  //   if (query == '' || res.isEmpty) {
-  //     return const Iterable<UnitData>.empty();
-  //   }
-  // }
-}
 
 typedef _Debounceable<S, T> = Future<S?> Function(T parameter);
 
