@@ -1,11 +1,13 @@
 import 'package:heat_sync/classes/building_data.dart';
 import 'package:heat_sync/classes/unit_data.dart';
 import 'package:heat_sync/widgets/building_autocomplete.dart';
+import 'package:heat_sync/widgets/line_chart.dart';
 import 'package:heat_sync/widgets/unit_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:heat_sync/widgets/heat_sync_card.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:logger/logger.dart';
+import 'package:heat_sync/classes/sample_data.dart';
 
 final logger = Logger();
 
@@ -110,12 +112,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                     elevation: 5,
                     child: Text(selectedDateRange, textAlign: TextAlign.center),
                   )),
-              const HeatSyncCard(
-                title: "LINE GRAPH",
-                description: "This is a placeholder",
-                width: 500,
-                height: 150,
-              ),
+              const LineChart(data: ),
             ],
           ),
           const Padding(
