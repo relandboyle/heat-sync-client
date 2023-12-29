@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:heat_sync/classes/building_data.dart';
+import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
+
+final logger = Logger();
 
 /// Flutter code sample for [Autocomplete] that demonstrates fetching the
 /// options asynchronously and debouncing the network calls, including handling
@@ -36,6 +39,8 @@ class BuildingAutocompleteState extends State<BuildingAutocomplete> {
   // Calls the "remote" API to search with the given query. Returns null when
   // the call has been made obsolete.
   Future<Iterable<BuildingData>?> _search(String query) async {
+    logger.i('Testing SEARCH in BuildingAutocomplete: $query');
+
     _currentQuery = query;
 
     late final Iterable<BuildingData> options;
@@ -129,7 +134,7 @@ class _FakeAPI {
         }));
 
     Iterable res = json.decode(response.body);
-    debugPrint('$res');
+    logger.i('$res');
     state._kOptions = List<BuildingData>.from(res.map((model) => BuildingData.fromJson(model)));
 
     return state._kOptions.where((BuildingData option) {
