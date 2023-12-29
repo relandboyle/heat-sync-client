@@ -80,7 +80,7 @@ class UnitAutocompleteState extends State<UnitAutocomplete> {
           fieldViewBuilder: (BuildContext context, TextEditingController controller, FocusNode focusNode, VoidCallback onFieldSubmitted) {
             return TextFormField(
               decoration: InputDecoration(
-                label: const Text("Select a Building"),
+                label: const Text("Select a Unit"),
                 border: const OutlineInputBorder(borderSide: BorderSide()),
                 errorText: _networkError ? 'Network error, please try again.' : null,
               ),
@@ -125,7 +125,7 @@ class _FakeAPI {
 
     final response = await http.post(
         // Uri.parse("http://localhost:8089/api/v1/unit/searchUnits"),
-        Uri.parse('https://heat-sync-534f0413abe0.herokuapp.com/api/v1/unit/searchBuildings'),
+        Uri.parse('https://heat-sync-534f0413abe0.herokuapp.com/api/v1/unit/searchUnits'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
